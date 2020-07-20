@@ -8,7 +8,7 @@
 //! Extract bits from slice of bytes:
 //!
 //! ```rust
-//! # use bitrange::*;
+//! # use simple_bitrange::*;
 //! let y: u32 = 0b00001111_11110000_01010000_00001010;
 //! let p: &[u8] = &y.to_le_bytes();
 //! let ret: u32 = p.range_read(..);
@@ -16,7 +16,7 @@
 //! assert_eq!(ret, y);
 //! ```
 
-// #![no_std]
+#![no_std]
 #![deny(missing_docs)]
 
 use core::mem::size_of;
