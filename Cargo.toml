@@ -17,6 +17,6 @@ repository = "https://github.com/korken89/simple-bitrange-rs"
 [dependencies]
 
 [features]
-default = ["enable-inline"]
+default = []
 enable-inline = []
 never-inline = []

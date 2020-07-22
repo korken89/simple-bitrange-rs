@@ -135,7 +135,9 @@ where
     (start_bit, total_bits, start_byte, end_byte)
 }
 
-#[inline]
+
+#[cfg_attr(feature = "enable-inline", inline)]
+#[cfg_attr(feature = "never-inline", inline(never))]
 fn bit_range_read_le_iter_impl<'a, I, R>(input: I, range: R) -> u64
 where
     I: Iterator<Item = &'a u8> + DoubleEndedIterator + ExactSizeIterator,
@@ -154,7 +156,8 @@ where
     output as u64
 }
 
-#[inline]
+#[cfg_attr(feature = "enable-inline", inline)]
+#[cfg_attr(feature = "never-inline", inline(never))]
 fn write_le_compound<R>(output: &mut [u8], val: u64, range: R)
 where
     R: RangeBounds<usize>,
@@ -178,7 +181,8 @@ where
     write_value_le(iter, work_value);
 }
 
-#[inline]
+#[cfg_attr(feature = "enable-inline", inline)]
+#[cfg_attr(feature = "never-inline", inline(never))]
 fn write_be_compound<R>(output: &mut [u8], val: u64, range: R)
 where
     R: RangeBounds<usize>,
