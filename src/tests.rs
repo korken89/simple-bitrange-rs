@@ -33,10 +33,10 @@ fn endian_check_le() {
 #[test]
 fn endian_check_be() {
     let y_be: u32 = 0b00001010_01010000_11110000_00001111;
-    let y_arr = &[0b00001010u8, 0b01010000, 0b11110000, 0b00001111];
-    assert_eq!(&y_be.to_be_bytes(), y_arr);
+    let y_arr_be = &[0b00001010u8, 0b01010000, 0b11110000, 0b00001111];
+    assert_eq!(&y_be.to_be_bytes(), y_arr_be);
 
-    let v: u32 = y_arr.range_read_be(..);
+    let v: u32 = y_arr_be.range_read_be(..);
     assert_eq!(v, y_be);
 }
 
@@ -47,7 +47,14 @@ fn read_range_be() {
 
     let r: u32 = y_arr.range_read_be(0..8);
     assert_eq!(r, 0b00001111);
+
+    let r: u32 = y_arr.range_read_be(0..16);
+    assert_eq!(r, 0b11110000_00001111);
+
+    let r: u32 = y_arr.range_read_be(0..24);
+    assert_eq!(r, 0b01010000_11110000_00001111);
 }
+
 
 #[test]
 fn read_range_le() {
@@ -60,4 +67,13 @@ fn read_range_le() {
 
     let z3: u32 = y.range_read_le(0..8);
     assert_eq!(z3, 0b00001110);
+
+    let arr = &[0x08, 0x00, 0x00, 0x00];
+    let r: u32 = arr.range_read_le(0..32);
+    assert_eq!(r, 0x08);
+
+    let arr = &[0x63, 0x90, 0x6e, 0x3e, 0x1e, 0x75, 0xa6, 0xd7];
+    let r: u64 = arr.range_read_le(0..64);
+    println!("r: {:x}", r);
+    assert_eq!(r, 0xd7a6_751e_3e6e_9063);
 }
