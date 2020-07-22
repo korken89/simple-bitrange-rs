@@ -154,6 +154,7 @@ where
     output as u64
 }
 
+#[inline]
 fn write_le_compound<R>(output: &mut [u8], val: u64, range: R)
 where
     R: RangeBounds<usize>,
@@ -177,6 +178,7 @@ where
     write_value_le(iter, work_value);
 }
 
+#[inline]
 fn write_be_compound<R>(output: &mut [u8], val: u64, range: R)
 where
     R: RangeBounds<usize>,
