@@ -16,7 +16,7 @@
 //! assert_eq!(ret, y);
 //! ```
 
-// #![no_std]
+#![no_std]
 #![deny(missing_docs)]
 
 use core::iter::{DoubleEndedIterator, ExactSizeIterator};
